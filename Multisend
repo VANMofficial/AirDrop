@@ -1,0 +1,19 @@
+pragma solidity ^0.4.24;
+
+import "./ERC20.sol";
+import "./ownable.sol";
+
+contract VANMAirdrop is Ownable {
+
+function multisend(address token, address[] adresses, uint256 value)
+onlyOwner
+returns (uint256) {
+    ERC20 erc20token = ERC20(token);
+    uint256 i = 0;
+    while (i < adresses.length) {
+       erc20token.transferFrom(msg.sender, adresses[i], value);
+       i += 1;
+    }
+    return(i);
+    }
+}
